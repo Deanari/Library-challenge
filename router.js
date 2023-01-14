@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { body } = require('express-validator');
 const userController = require('./controllers/user.controller');
 const bookController = require('./controllers/book.controller');
+const reservationController = require('./controllers/reservation.controller');
 
 const tokenValidation = (req, res, next) => {
   const token = req.headers.authorization;
@@ -24,7 +25,7 @@ const tokenValidation = (req, res, next) => {
       });
     }
 
-    req.user =  { userId: tokenDecode.userId }
+    req.body.userId = tokenDecode.userId.toString();
 
     return next();
   });
@@ -36,6 +37,7 @@ router.get('/', (req, res) => res.status(200).send ({
 
 // _______________________ PUBLIC ROUTER _______________________
 
+// ---- USER ------
 router.post(
   '/user',
     body('name').isLength({ min: 4 }),
@@ -43,11 +45,21 @@ router.post(
     body('password').isLength({ min: 5 }),
     userController.createUser);
 
-router.post('/login', userController.processLogin);
+router.post(
+  '/login',
+    body('email').isEmail(),
+    body('password').isLength({ min: 5 }),
+    userController.processLogin);
+
+// ---- BOOK ------
 router.get('/book', bookController.getBooks);
 
 // _______________________ PRIVATE ROUTER _______________________
+
+// ---- USER ------
 router.get('/user', tokenValidation, userController.getAllUsers);
+
+// ---- BOOK ------
 router.post(
   '/book',
     body('name').isLength({ min: 4 }),
@@ -55,5 +67,14 @@ router.post(
     body('author').isLength({ min: 5 }),
     body('year').isInt({ min: 1900, max: 2050 }),
   tokenValidation, bookController.createBook);
+
+// ---- RESERVATION ------
+router.get('/reservation', tokenValidation, reservationController.getReservation);
+router.post(
+  '/reservation',
+    body('bookId').isString(),
+    body('reservationDate').isAfter(),
+    body('expirationDate').isAfter(),
+    tokenValidation, reservationController.createReservation);
 
 module.exports = router;

@@ -31,17 +31,8 @@ CREATE TABLE `Book` (
   `year` year NOT NULL,
   `author` varchar(45) NOT NULL,
   PRIMARY KEY (`book_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Book`
---
-
-LOCK TABLES `Book` WRITE;
-/*!40000 ALTER TABLE `Book` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Book` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `Reservation`
@@ -52,25 +43,17 @@ DROP TABLE IF EXISTS `Reservation`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Reservation` (
   `reservation_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `book_id` int DEFAULT NULL,
-  `reserved_on` date DEFAULT NULL,
+  `user_id` int NOT NULL,
+  `book_id` int NOT NULL,
+  `reservation_date` date NOT NULL,
   `expires_on` date DEFAULT NULL,
+  `returned` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`reservation_id`),
   KEY `FK_User` (`book_id`),
   CONSTRAINT `FK_Book` FOREIGN KEY (`book_id`) REFERENCES `Book` (`book_id`),
   CONSTRAINT `FK_User` FOREIGN KEY (`book_id`) REFERENCES `Book` (`book_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Reservation`
---
-
-LOCK TABLES `Reservation` WRITE;
-/*!40000 ALTER TABLE `Reservation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Reservation` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `User`
@@ -88,15 +71,6 @@ CREATE TABLE `User` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `User`
---
-
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -107,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-14 13:14:53
+-- Dump completed on 2023-01-14 16:01:47

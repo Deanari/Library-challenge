@@ -46,7 +46,7 @@ CREATE TABLE `Reservation` (
   `user_id` int NOT NULL,
   `book_id` int NOT NULL,
   `reservation_date` date NOT NULL,
-  `expires_on` date DEFAULT NULL,
+  `expiration_date` date DEFAULT NULL,
   `returned` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`reservation_id`),
   KEY `FK_User` (`book_id`),

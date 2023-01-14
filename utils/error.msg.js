@@ -30,6 +30,12 @@ const invalidPassword = {
   errorMsg: 'Password provided did not match',
 };
 
+const unavailable = {
+  status: 409,
+  error: 'unavailable',
+  errorMsg: 'The resource is not available',
+};
+
 // _________________
 
 const errorHandler = (error, res) => {
@@ -45,5 +51,6 @@ module.exports = {
   entityNotFound,
   internalError,
   invalidPassword,
+  unavailable,
   errorHandler,
 };

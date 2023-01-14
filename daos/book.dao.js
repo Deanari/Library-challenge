@@ -23,6 +23,10 @@ const getBookByName = (name, callback) => {
   db.query('SELECT * FROM Book WHERE name = ?', [name], callback);
 };
 
+const getBookById = (bookId, callback) => {
+  db.query('SELECT * FROM Book WHERE book_id = ?', [bookId], callback);
+};
+
 const createBook = (params, callback) => {
   const { name, genre, year, author } = params;
   db.query('INSERT INTO Book (`name`, `genre`, `year`, `author`) VALUES (?, ?, ?, ?);', [name, genre, year, author], callback);
@@ -32,5 +36,6 @@ module.exports = {
   getAllBooks,
   getBooks,
   getBookByName,
+  getBookById,
   createBook
 };

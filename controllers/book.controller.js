@@ -11,7 +11,7 @@ const getValidFilters = (params) => {
       year: params.year || null,
       genre: params.genre || null,
     }
-      // creates an object of not null filters from the validated filters
+    // creates an object of not null filters from the validated filters
     filters = Object.fromEntries(Object.entries(validatedFilters).filter(([_, v]) => v != null));
   }
   return filters;
@@ -20,8 +20,8 @@ const getValidFilters = (params) => {
 const getBooks = (req, res) => {
   try {
     const filters = getValidFilters(req.query);
-    bookService.getBooks(filters, (err, data) => {
-      if(err) throw errorType.internalError;
+    bookService.getBooks(filters, (error, data) => {
+      if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ data });
     });
   } catch (error) {

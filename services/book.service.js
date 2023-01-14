@@ -21,9 +21,14 @@ const getBookByName = (email, callback) => {
   bookDao.getBookByName(email, callback);
 }
 
+const getBookById = (bookId, callback) => {
+  bookDao.getBookById(bookId, callback);
+}
+
 module.exports = {
   getAllBooks,
   getBooks,
   createBook,
-  getBookByName
+  getBookByName,
+  getBookById
 };

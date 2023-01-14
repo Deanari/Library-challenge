@@ -4,8 +4,8 @@ const { validationResult } = require('express-validator');
 
 const getAllUsers = (req, res) => {
   try {
-    userService.getAllUsers((err, data) => {
-      if(err) throw errorType.internalError;
+    userService.getAllUsers((error, data) => {
+      if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ data });
     });
   } catch (error) {
@@ -14,12 +14,9 @@ const getAllUsers = (req, res) => {
 };
 
 const createUser = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    };
-
     userService.createUser(req.body, (error, data) => {
       if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ message: 'successfully created' });
@@ -30,10 +27,9 @@ const createUser = (req, res) => {
 };
 
 const processLogin = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
-    const { email, password } = req.body;
-    if ( !email || !password) return errorType.errorHandler(errorType.missingParameters, res);
-
     userService.processLogin(req.body, (error, data) => {
       if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ data: data });

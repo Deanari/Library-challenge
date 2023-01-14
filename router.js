@@ -73,8 +73,6 @@ router.get('/reservation', tokenValidation, reservationController.getReservation
 router.post(
   '/reservation',
     body('bookId').isString(),
-    body('reservationDate').isAfter(),
-    body('expirationDate').isAfter(),
     tokenValidation, reservationController.createReservation);
 
 module.exports = router;

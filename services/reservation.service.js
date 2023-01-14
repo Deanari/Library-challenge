@@ -9,7 +9,7 @@ const getReservation = (userId, callback) => {
 const checkAvaliability = (params, callback) => {
   reservationDao.getConflictReservations(params, (error, data) => {
     if (error) return callback(errorType.internalError);
-    if (data && data.length) return callback(null, false)
+    if (data && data.length) return callback(null, false);
     return callback(null, true)
   })
 }

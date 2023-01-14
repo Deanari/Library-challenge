@@ -14,16 +14,15 @@ const getReservation = (req, res) => {
 };
 
 const getParsedParams = (params) => {
-  let parsedParams = {};
-  if (params) {
-    parsedParams = {
-      bookId: params.bookId || null,
-      userId: params.userId || null,
-      reservationDate: new Date(params.reservationDate).getTime() / 1000,
-      expirationDate: new Date(params.expirationDate).getTime() / 1000,
-    }
-  }
-  return parsedParams;
+  const bookId = params.bookId;
+  const userId = params.userId;
+  let reservationDate = new Date().getTime() / 1000;// default today
+  let expirationDate = new Date().getTime() / 1000 + 60 * 60 * 24 * 3; //default 3 days;
+
+  if (params.reservationDate) reservationDate = new Date(params.reservationDate).getTime() / 1000;
+  if (params.expirationDate) expirationDate = new Date(params.expirationDate).getTime() / 1000;
+
+  return { bookId, userId, reservationDate, expirationDate };
 };
 
 const createReservation = (req, res) => {

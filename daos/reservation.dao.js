@@ -14,9 +14,10 @@ const getConflictReservations = (params, callback) => {
   const { bookId, reservationDate, expirationDate } = params;
   const query = `SELECT *
     FROM Reservation
-    WHERE (expiration_date > FROM_UNIXTIME(${reservationDate}) AND expiration_date < FROM_UNIXTIME(${expirationDate}))
+    WHERE 
+    ((expiration_date > FROM_UNIXTIME(${reservationDate}) AND expiration_date < FROM_UNIXTIME(${expirationDate}))
     OR (reservation_date > FROM_UNIXTIME(${reservationDate}) AND reservation_date < FROM_UNIXTIME(${expirationDate}))
-    OR (reservation_date < FROM_UNIXTIME(${reservationDate}) AND expiration_date > FROM_UNIXTIME(${expirationDate}))
+    OR (reservation_date < FROM_UNIXTIME(${reservationDate}) AND expiration_date > FROM_UNIXTIME(${expirationDate})))
     AND book_id = ${bookId};`
   db.query(query, callback);
 }

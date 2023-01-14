@@ -11,7 +11,7 @@ const swaggerData = {
       }
     ]
   },
-  "apis": [`${__dirname}/routes.js`]
+  "apis": [`${__dirname}/router.js`]
 }
 
 module.exports = swaggerData;

@@ -27,8 +27,9 @@ DROP TABLE IF EXISTS `Book`;
 CREATE TABLE `Book` (
   `book_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
+  `genre` varchar(255) NOT NULL,
   `year` year NOT NULL,
+  `author` varchar(45) NOT NULL,
   PRIMARY KEY (`book_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -85,7 +86,7 @@ CREATE TABLE `User` (
   `password` varchar(255) NOT NULL,
   `birth_date` date DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-12 20:34:50
+-- Dump completed on 2023-01-14 13:14:53

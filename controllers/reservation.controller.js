@@ -29,10 +29,9 @@ const getParsedParams = (params) => {
 const createReservation = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-
   try {
     reservationService.createReservation(getParsedParams(req.body), (error, data) => {
-      if(error) return errorType.errorHandler(error, res);
+      if (error) return errorType.errorHandler(error, res);
       return res.status(200).send({ message: 'Reservation created successfully' });
     });
   } catch (error) {

@@ -74,5 +74,6 @@ router.post(
   '/reservation',
     body('bookId').isString(),
     tokenValidation, reservationController.createReservation);
+router.put('/reservation/:reservationId', tokenValidation, reservationController.editReservation);
 
 module.exports = router;

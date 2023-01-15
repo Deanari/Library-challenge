@@ -22,6 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use("/api", router);
 
+const cronjob = require('./cronjobs/expiredReservations');
+cronjob.initExpiredReservationJob();
+
 const server = http.createServer(app);
 server.listen(8080, () => { console.log('Up and ready') });
 

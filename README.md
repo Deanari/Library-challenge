@@ -11,6 +11,9 @@ Hello there.
     - DATABASE_USER: Your db user, or by default -> root
     - DATABASE_PASSWORD: Your db password, or by default -> password
     - JWT_SECRET_KEY: A secret combination of characters for your jwt validation, example -> supersecretkey
+    - EMAIL_HOST: This is the email host, you can create a test host at https://ethereal.email/
+    - EMAIL_USER: Username of the account that will send the emails, you can use the user from ethereal
+    - EMAIL_PASSWORD: Password of the account that will send the emails, you can use the user from ethereal
 * npm run dev
 
 ### How do I use this? ###

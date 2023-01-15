@@ -36,9 +36,24 @@ const createReservation = (req, res) => {
   } catch (error) {
     return errorType.errorHandler(error, res);
   }
+};
+
+const editReservation = (req, res) => {
+  try {
+    let newData = {};
+    if (req.body.expirationDate) newData.expirationDate = new Date(req.body.expirationDate).getTime() / 1000;
+    if (req.body.returned) newData.returned = req.body.returned;
+    reservationService.editReservation(req.params.reservationId, newData, (err, data) => {
+      if(err) throw errorType.internalError;
+      return res.status(200).send({ message: data.message });
+    });
+  } catch (error) {
+    return errorType.errorHandler(error, res);
+  }
 }
 
 module.exports = {
   getReservation,
-  createReservation
+  createReservation,
+  editReservation
 };

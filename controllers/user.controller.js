@@ -13,11 +13,18 @@ const getAllUsers = (req, res) => {
   }
 };
 
+const getParsedParams = (params) => {
+  const { name, email, password } = params;
+  let birthDate = null;
+  if (params.birthDate) birthDate = new Date(params.birthDate).getTime() / 1000
+  return { name, email, password, birthDate };
+};
+
 const createUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
   try {
-    userService.createUser(req.body, (error, data) => {
+    userService.createUser(getParsedParams(req.body), (error, data) => {
       if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ message: 'successfully created' });
     });
@@ -34,8 +41,7 @@ const processLogin = (req, res) => {
       if(error) return errorType.errorHandler(error, res);
       return res.status(200).send({ data: data });
     });
-
-  } catch (e) {
+  } catch (error) {
     return errorType.errorHandler(error, res);
   }
 

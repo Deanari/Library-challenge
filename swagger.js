@@ -9,9 +9,17 @@ const swaggerData = {
       {
         "url": "http://localhost:8080/api"
       }
-    ]
+    ],
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer"
+        }
+      }
+    }
   },
-  "apis": [`${__dirname}/router.js`]
+  "apis": [`${__dirname}/docs/**/*.yaml`],
 }
 
 module.exports = swaggerData;

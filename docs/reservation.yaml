@@ -1,0 +1,91 @@
+paths:
+  /reservation:
+    get:
+      tags: 
+        - Reservation
+      summary: returns list of reservations for logged user
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      responses:
+        200:
+          description: Returns list of books
+        404:
+          description: Resource not found
+        500:
+          description: Something crashed
+    post:
+      tags:
+        - Reservation
+      summary: creates a new reservation
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookId:
+                  type: string
+                reservationDate:
+                  type: string
+                expirationDate:
+                  type: string
+      responses:
+        200:
+          description: Reservation created successfully
+        400:
+          description: Invalid parameters
+        401:
+          description: Unauthorized
+        404:
+          description: Entity not found
+        409:
+          description: Book unavailable for reservation on specified date
+        500:
+          description: Something crashed
+  /reservation/{reservationId}:
+    put:
+      tags: 
+        - Reservation
+      summary: modify a reservation
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: reservationId
+          schema:
+            type: string
+          required: true
+          description: Identification key of reservation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                returned:
+                  type: boolean
+                expirationDate:
+                  type: string
+      responses:
+        200:
+          description: Reservation updated
+        401:
+          description: Unauthorized
+        404:
+          description: Resource not found
+        500:
+          description: Something crashed

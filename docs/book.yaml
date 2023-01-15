@@ -1,0 +1,72 @@
+paths:
+  /book:
+    get:
+      tags: 
+        - Book
+      summary: returns list of books
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Filter by book name
+        - in: query
+          name: author
+          schema:
+            type: string
+          description: Filter by author name
+        - in: query
+          name: genre
+          schema:
+            type: string
+          description: Filter by genre
+        - in: query
+          name: year
+          schema:
+            type: string
+          description: Filter by year
+      responses:
+        200:
+          description: Returns list of books
+        500:
+          description: Something crashed
+    post:
+      tags:
+        - Book
+      summary: creates a new book
+      security:
+        - BearerAuth: []
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                author:
+                  type: string
+                genre:
+                  type: string
+                year:
+                  type: string
+      responses:
+        200:
+          description: Book created successfully
+        400:
+          description: Invalid parameters
+        401:
+          description: Unauthorized
+        409:
+          description: Book already created
+        500:
+          description: Something crashed
+    

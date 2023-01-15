@@ -36,6 +36,12 @@ const unavailable = {
   errorMsg: 'The resource is not available',
 };
 
+const unauthorized = {
+  status: 401,
+  error: 'unauthorized',
+  errorMsg: 'Authorization token is invalid or missing',
+};
+
 // _________________
 
 const errorHandler = (error, res) => {
@@ -52,5 +58,6 @@ module.exports = {
   internalError,
   invalidPassword,
   unavailable,
+  unauthorized,
   errorHandler,
 };

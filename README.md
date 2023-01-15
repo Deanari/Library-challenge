@@ -19,6 +19,7 @@ Hello there.
 ### How do I use this? ###
 * run the project
 * go to http://localhost:8080/api/docs/ for a full list of available endpoints
+* Create an user, log in as user from authorization, create books, check books, create reservations, check reservations, mark a reservation as returned.
 
 ### Troubleshoot ###
 * Client does not support authentication protocol...
